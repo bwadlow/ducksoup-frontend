@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from './Card'
 
+
 const List =(props) => {
 
   const cardGroup = props.cards.filter(card =>(
@@ -10,8 +11,11 @@ const List =(props) => {
   const cardArray = cardGroup.map(card =>(
     <Card
       key={card.id}
-      card={card}/>
+      card={card}
+      changeView={props.changeView}/>
   ))
+
+
 
   return (
     <div>

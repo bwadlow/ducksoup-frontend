@@ -11,7 +11,9 @@ const BoardPage = (props) => {
       cards={props.cards}
       handleNaming={props.handleNaming}
       createNewList = {props.createNewList}
-      createNewCard = {props.createNewCard}/>
+      createNewCard = {props.createNewCard}
+      handleListView = {props.handleListView}
+      changeView = {props.changeView}/>
   ))
 
   return (

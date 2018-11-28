@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Header from './components/Header'
 import BoardPage from './components/BoardPage'
+import CardDetail from './components/CardDetail'
 
 import './App.css';
 
@@ -12,7 +13,7 @@ class App extends Component {
     cards:[],
     users:[],
     currentCard:null,
-    
+    listView:true,
     newBoardName: "",
     newListName: "",
     newCardName: "",
@@ -85,22 +86,48 @@ class App extends Component {
     this.setState({[event.target.name]:event.target.value})
   }
 
+  changeView = (cardId) => {
+    this.setState({
+      listView:false,
+      currentCard:cardId
+    })
+  }
+
+  seeAll = () => {
+    this.setState({
+      currentCard: null,
+      listView: true
+    })
+  };
+
 
   render() {
+
+    let displayedView;
+    let displayedCard = this.state.currentCard ? this.state.cards.find(card => card.id === this.state.currentCard) : null;
+
+
+
+    if (this.state.listView) {
+      displayedView = <BoardPage
+        boards={this.state.boards}
+        lists={this.state.lists}
+        cards={this.state.cards}
+        newBoardName = {this.state.newBoardName}
+        handleNaming = {this.handleNaming}
+        createNewBoard = {this.createNewBoard}
+        createNewList = {this.createNewList}
+        createNewCard = {this.createNewCard}
+        changeView = {this.changeView}/>
+    } else {
+      displayedView = <CardDetail card={displayedCard} seeAll={this.seeAll}/>
+    }
+
+
     return (
       <div>
         <Header/><br></br>
-        <BoardPage
-          boards={this.state.boards}
-          lists={this.state.lists}
-          cards={this.state.cards}
-          newBoardName = {this.state.newBoardName}
-          handleNaming = {this.handleNaming}
-          createNewBoard = {this.createNewBoard}
-          createNewList = {this.createNewList}
-          createNewCard = {this.createNewCard}
-          listToggle = {this.state.listToggle}
-          cardToggle = {this.state.cardToggle}/>
+        {displayedView}
       </div>
     );
   }
