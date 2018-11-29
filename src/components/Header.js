@@ -1,11 +1,11 @@
 import React from 'react'
 
 
-const Header = () => {
+const Header = (props) => {
 
   return(
       <div className='ui segment' align="center">
-    <h3 className='ui blue header'>DuckSoup</h3>
+    <h2 className='ui blue header'>DuckSoup</h2>
     </div>
   )
 }

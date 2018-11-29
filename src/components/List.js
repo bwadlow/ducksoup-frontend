@@ -12,7 +12,7 @@ const List =(props) => {
     <Card
       key={card.id}
       card={card}
-      changeView={props.changeView}/>
+      changeCardView={props.changeCardView}/>
   ))
 
 
