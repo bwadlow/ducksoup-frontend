@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 import BoardPage from './components/BoardPage'
 import './App.css';
 

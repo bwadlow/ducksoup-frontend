@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import BoardCollection from './BoardCollection'
 import BoardDetail from './BoardDetail'
 
-import Header from './Header'
 
 
 class BoardPage extends Component {
@@ -73,6 +72,11 @@ class BoardPage extends Component {
 
   createNewCard = (event, listId) => {
     event.preventDefault()
+
+    let position = this.state.cards.filter(card =>(
+      card.list_id === listId
+    )).length+1
+
     fetch('http://localhost:4000/cards',{
       method:'POST',
       headers: {
@@ -83,6 +87,7 @@ class BoardPage extends Component {
         title:this.state.newCardName,
         description: "",
         comment: "",
+        position:position,
         list_id:listId
       })
     })
@@ -127,6 +132,33 @@ class BoardPage extends Component {
     })
   }
 
+  onDragOver = event => {
+    event.preventDefault()
+  }
+
+  onDragStart = (event, cardId) => {
+    console.log("dragstart", cardId)
+    event.dataTransfer.setData('id', cardId)
+  }
+
+  onDrop = (event, listId) => {
+
+    let id = event.dataTransfer.getData('id')
+    let cards = this.state.cards.filter(card =>{
+      if(card.id === Number(id)) {
+        card.list_id = listId
+      }
+      return card
+
+    })
+
+    this.setState({
+      ...this.state.cards,
+      cards
+    })
+  }
+
+
 render() {
   let displayedView;
   let selectedBoard = this.state.currentBoard ? this.state.boards.find(board => board.id === this.state.currentBoard) : null;
@@ -152,17 +184,21 @@ render() {
           currentBoard={this.state.currentBoard}
           allCards={this.state.allCards}
           createNewCard={this.createNewCard}
-          handleNaming={this.handleNaming}/>
+          handleNaming={this.handleNaming}
+          onDragOver={this.onDragOver}
+          onDragStart={this.onDragStart}
+          onDrop={this.onDrop}/>
       }
 
 
-
   return (
-    <div className='ui container'>
-        <Header/>
-        <div className='ui grid'>
-          {displayedView}
-        </div>
+          <div className='ui container'>
+            <div>
+              <h1 className='ui center aligned header'>DuckSoup</h1>
+            </div>
+            <div className='ui grid'>
+              {displayedView}
+            </div>
         </div>
     )
   }
