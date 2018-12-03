@@ -29,7 +29,8 @@ const BoardDetail = (props) => {
       handleNaming={props.handleNaming}
       onDragOver={props.onDragOver}
       onDragStart={props.onDragStart}
-      onDrop={props.onDrop}/>
+      onDrop={props.onDrop}
+      onCardDrop={props.onCardDrop}/>
   </div>
   </Fragment>
 

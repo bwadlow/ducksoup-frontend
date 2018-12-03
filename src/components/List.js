@@ -1,49 +1,51 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Card from './Card'
 
 
 
-const List =(props) => {
+class List extends Component {
 
-  const cardGroup = props.cards.filter(card =>(
-    card.list_id ===props.list.id
-  ))
 
-  const cardArray = cardGroup.map((card, index) =>(
-    <Card
+  cardArray = (cardGroup) => {
+    return cardGroup.map((card) =>{
+     return <Card
+      droppable
       key={card.id}
       card={card}
-      index={index}
-      changeCardView={props.changeCardView}
-      onDragStart={props.onDragStart}
-      onDragOver={props.onDragOver}/>
-  ))
+      changeCardView={this.props.changeCardView}
+      onDragStart={this.props.onDragStart}
+      onDragOver={this.props.onDragOver}
+      onCardDrop={this.props.onCardDrop}/>
+    }
+  )}
+
+
+render() {
+  let cardGroup = this.props.cards.filter(card =>(
+    card.list_id === this.props.list.id
+  )).sort((a,b) => (a.position - b.position))
 
 
 
   return (
 
-
-    <div id='list'
-        className='ui raised card list'
-        onDragOver={(event)=>{props.onDragOver(event)}}
-        onDrop={(event)=>{props.onDrop(event, props.list.id)}}>
+    <div id='list' className='ui raised card list'
+        onDragOver={(event)=>{this.props.onDragOver(event)}}
+        onDrop={(event)=>{this.props.onDrop(event, this.props.list.id)}}>
           <div className='content'>
-            <div className='header' >{props.list.title}</div>
-              {cardArray}
+            <div className='header' >{this.props.list.title}</div>
+              {this.cardArray(cardGroup)}
             </div>
 
       <div className="ui card">
-      <form className='ui form' onSubmit={(event)=>{props.createNewCard(event, props.list.id)}}>
-        <input name='newCardName' placeholder='Enter New Card Title'onChange={props.handleNaming}/>
+      <form className='ui form' onSubmit={(event)=>{this.props.createNewCard(event, this.props.list.id)}}>
+        <input name='newCardName' placeholder='Enter New Card Title'onChange={this.props.handleNaming}/>
         <input type='submit' value="+ Card" className='ui blue mini button'/>
       </form>
       </div>
     </div>
-
-  
-
   )
+  }
 }
 
 export default List

@@ -18,7 +18,8 @@ class ListCollection extends Component {
           handleNaming={this.props.handleNaming}
           onDragOver={this.props.onDragOver}
           onDragStart={this.props.onDragStart}
-          onDrop={this.props.onDrop}/>
+          onDrop={this.props.onDrop}
+          onCardDrop={this.props.onCardDrop}/>
       })
     }
 
@@ -27,6 +28,8 @@ class ListCollection extends Component {
       let listArray = this.props.lists.filter(list=>(
         list.board_id === this.props.selectedBoard.id
       ))
+
+
 
       let displayedView;
       let selectedCard = this.props.currentCard ? this.props.cards.find(card => card.id === this.props.currentCard) : null;

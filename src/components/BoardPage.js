@@ -137,26 +137,56 @@ class BoardPage extends Component {
   }
 
   onDragStart = (event, cardId) => {
-    console.log("dragstart", cardId)
     event.dataTransfer.setData('id', cardId)
   }
 
   onDrop = (event, listId) => {
-
     let id = event.dataTransfer.getData('id')
-    let cards = this.state.cards.filter(card =>{
+    let cards = this.state.cards.filter((card) =>{
       if(card.id === Number(id)) {
         card.list_id = listId
       }
       return card
-
     })
-
     this.setState({
       ...this.state.cards,
       cards
     })
   }
+
+  onCardDrop = (event, cardId) => {
+    let bumpedCard = this.state.cards.find(card => card.id === cardId)
+    let id = event.dataTransfer.getData('id')
+    let cards = this.state.cards.filter(card =>{
+      if(card.id === Number(id)) {
+        let holder = card.position
+        card.position = bumpedCard.position
+        bumpedCard.position = holder
+      }
+
+      return card
+    })
+
+    this.setState({
+      ...this.state.cards,
+      cards,
+      bumpedCard
+    },()=>{
+      this.state.cards.forEach(card =>(
+        fetch(`http://localhost:4000/cards/${card.id}`,{
+          method:'PATCH',
+          headers: {
+            'Accept':'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            position:card.position
+          })
+        })
+      ))
+    })
+    }
+
 
 
 render() {
@@ -187,7 +217,8 @@ render() {
           handleNaming={this.handleNaming}
           onDragOver={this.onDragOver}
           onDragStart={this.onDragStart}
-          onDrop={this.onDrop}/>
+          onDrop={this.onDrop}
+          onCardDrop={this.onCardDrop}/>
       }
 
 
