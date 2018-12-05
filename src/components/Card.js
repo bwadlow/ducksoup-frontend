@@ -1,8 +1,13 @@
 import React from 'react'
 
-
-
 const Card = (props) => {
+
+  const descriptionIcon =
+      <div>
+      <i aria-hidden='true' className='file text outline small icon'/>
+      </div>
+
+      const displayIcon = props.card.description ? descriptionIcon : null
 
 
 
@@ -16,6 +21,9 @@ const Card = (props) => {
         onClick={()=>{props.changeCardView(props.card.id)}}>
     <div className='content' id={props.card.position}>
       <div className='header' id={props.card.position}>{props.card.title}
+      </div>
+      <div>
+      {displayIcon}
       </div>
     </div>
   </div>

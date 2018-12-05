@@ -11,7 +11,7 @@ const BoardDetail = (props) => {
       <h2 className='ui left aligned header'>{props.selectedBoard.name}</h2>
       <i aria-hidden='true' className='large close link icon' onClick={props.seeAllBoards}/><br/><br/>
     <div className="ui grid column">
-    <form className='ui form' onSubmit={(event)=>{props.createNewList(event, props.currentBoard)}}>
+    <form className='ui form' autocomplete="off" onSubmit={(event)=>{props.createNewList(event, props.currentBoard)}}>
     <input name='newListName' placeholder='New List Name'onChange={props.handleNaming}/>
     <input type='submit' value='+ List' className='ui blue mini button' />
 
@@ -30,7 +30,10 @@ const BoardDetail = (props) => {
       onDragOver={props.onDragOver}
       onDragStart={props.onDragStart}
       onDrop={props.onDrop}
-      onCardDrop={props.onCardDrop}/>
+      onCardDrop={props.onCardDrop}
+      commentDisplay={props.commentDisplay}
+      ChangeCardDetailComment={props.ChangeCardDetailComment}
+      createCardComment={props.createCardComment}/>
   </div>
   </Fragment>
 

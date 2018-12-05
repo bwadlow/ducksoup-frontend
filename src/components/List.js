@@ -38,14 +38,13 @@ render() {
             </div>
 
       <div className="ui card">
-      <form className='ui form' onSubmit={(event)=>{this.props.createNewCard(event, this.props.list.id)}}>
+      <form className='ui form' autocomplete="off" onSubmit={(event)=>{this.props.createNewCard(event, this.props.list.id)}}>
         <input name='newCardName' placeholder='Enter New Card Title'onChange={this.props.handleNaming}/>
         <input type='submit' value="+ Card" className='ui blue mini button'/>
       </form>
       </div>
     </div>
-  )
-  }
+  )}
 }
 
 export default List

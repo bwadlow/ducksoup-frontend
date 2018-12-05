@@ -39,7 +39,11 @@ class ListCollection extends Component {
       } else {
         displayedView = <CardDetail
           card={selectedCard}
-          seeAllCards={this.props.seeAllCards}/>
+          seeAllCards={this.props.seeAllCards}
+          commentDisplay={this.props.commentDisplay}
+          ChangeCardDetailComment={this.props.ChangeCardDetailComment}
+          handleNaming={this.props.handleNaming}
+          createCardComment={this.props.createCardComment}/>
       }
 
     return(

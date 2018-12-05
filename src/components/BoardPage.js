@@ -10,7 +10,6 @@ class BoardPage extends Component {
     boards:[],
     lists:[],
     cards:[],
-    listOrder:[],
     users:[],
     allCards:true,
     currentCard:null,
@@ -18,7 +17,10 @@ class BoardPage extends Component {
     newListName: "",
     newCardName: "",
     allBoards:true,
-    currentBoard:null
+    currentBoard:null,
+    commentDisplay:true,
+    commentText: ""
+
   }
 
   componentDidMount(){
@@ -33,7 +35,7 @@ class BoardPage extends Component {
       method:'POST',
       headers: {
         'Accept':'application/json',
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         name:this.state.newBoardName,
@@ -54,7 +56,7 @@ class BoardPage extends Component {
       method:'POST',
       headers: {
         'Accept':'application/json',
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         title:this.state.newListName,
@@ -81,7 +83,7 @@ class BoardPage extends Component {
       method:'POST',
       headers: {
         'Accept':'application/json',
-        'content-type': 'application/json'
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         title:this.state.newCardName,
@@ -99,6 +101,28 @@ class BoardPage extends Component {
     event.target.reset()
   }
 
+  createCardComment = (event, cardId) => {
+    event.preventDefault()
+    let updatedCard = this.state.cards.find(card => card.id===cardId)
+    updatedCard.description=this.state.commentText
+    this.setState({
+      ...this.state.cards,
+      updatedCard,
+      commentDisplay:!this.state.commentDisplay
+
+    },() => fetch(`http://localhost:4000/cards/${cardId}`,{
+      method:'PATCH',
+      headers: {
+        'Accept':'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        description:this.state.commentText
+      })
+    })
+    )
+  }
+
   handleNaming = (event) => {
     this.setState({[event.target.name]:event.target.value})
   }
@@ -113,8 +137,8 @@ class BoardPage extends Component {
   seeAllCards = () => {
     this.setState({
       currentCard: null,
-      allCards: true
-    })
+      allCards: true,
+    },() => this.state.commentDisplay ? null: this.setState({commentDisplay:!this.state.commentDisplay}))
   };
 
   toggleBoardView = (boardId) => {
@@ -163,10 +187,8 @@ class BoardPage extends Component {
         card.position = bumpedCard.position
         bumpedCard.position = holder
       }
-
       return card
     })
-
     this.setState({
       ...this.state.cards,
       cards,
@@ -185,7 +207,11 @@ class BoardPage extends Component {
         })
       ))
     })
-    }
+  }
+
+  ChangeCardDetailComment = () => (
+    this.setState({commentDisplay:!this.state.commentDisplay})
+  )
 
 
 
@@ -218,7 +244,10 @@ render() {
           onDragOver={this.onDragOver}
           onDragStart={this.onDragStart}
           onDrop={this.onDrop}
-          onCardDrop={this.onCardDrop}/>
+          onCardDrop={this.onCardDrop}
+          commentDisplay={this.state.commentDisplay}
+          ChangeCardDetailComment={this.ChangeCardDetailComment}
+          createCardComment={this.createCardComment}/>
       }
 
 
