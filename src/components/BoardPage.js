@@ -31,6 +31,10 @@ class BoardPage extends Component {
 
   createNewBoard = (event) => {
     event.preventDefault()
+    if (!this.state.newBoardName) {
+      return false
+    }
+
     fetch('http://localhost:4000/boards',{
       method:'POST',
       headers: {
@@ -52,6 +56,9 @@ class BoardPage extends Component {
 
   createNewList = (event, boardId) => {
     event.preventDefault()
+    if (!this.state.newListName) {
+      return false
+    }
     fetch('http://localhost:4000/lists',{
       method:'POST',
       headers: {
@@ -74,7 +81,9 @@ class BoardPage extends Component {
 
   createNewCard = (event, listId) => {
     event.preventDefault()
-
+    if (!this.state.newCardName) {
+      return false
+    }
     let position = this.state.cards.filter(card =>(
       card.list_id === listId
     )).length+1
@@ -103,6 +112,9 @@ class BoardPage extends Component {
 
   createCardComment = (event, cardId) => {
     event.preventDefault()
+    if (!this.state.commentText) {
+      return false
+    }
     let updatedCard = this.state.cards.find(card => card.id===cardId)
     updatedCard.description=this.state.commentText
     this.setState({
@@ -123,9 +135,9 @@ class BoardPage extends Component {
     )
   }
 
-  handleNaming = (event) => {
-    this.setState({[event.target.name]:event.target.value})
-  }
+  handleNaming = (event) =>(
+  this.setState({[event.target.name]:event.target.value})
+  )
 
   changeCardView = (cardId) => {
     this.setState({
@@ -253,9 +265,7 @@ render() {
 
   return (
           <div className='ui container'>
-            <div>
-              <h1 className='ui center aligned header'>DuckSoup</h1>
-            </div>
+          
             <div className='ui grid'>
               {displayedView}
             </div>

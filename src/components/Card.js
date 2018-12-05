@@ -9,6 +9,24 @@ const Card = (props) => {
 
       const displayIcon = props.card.description ? descriptionIcon : null
 
+      const dueDate = () => {
+        let x=new Date();
+        x.setFullYear(2018,1,1);
+        let today = new Date();
+
+        if (x>today)
+          {
+          return "Overdue";
+          }
+        else if (x<today)
+          {
+          return "x days left";
+          }
+        else {
+          return "Due Today";
+          }
+        }
+
 
 
   return (

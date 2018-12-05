@@ -17,7 +17,7 @@ class BoardCollection extends Component{
   return (
     <div className="ui four column grid">
       <div className="ui grid column">
-        <form className='ui form' autocomplete="off"  onSubmit={(event)=>{this.props.createNewBoard(event)}}>
+        <form className='ui form' autoComplete="off"  onSubmit={(event)=>{this.props.createNewBoard(event)}}>
         <input name='newBoardName' placeholder='New Board Name'onChange={this.props.handleNaming}/>
         <input type="submit" value="+ Board" className='ui blue mini button' />
         </form>

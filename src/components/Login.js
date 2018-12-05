@@ -1,8 +1,11 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import logo from '../images/ducksoup_logo.png'
 
-const LoginForm = () => (
-  <div className='login-form' id='login' >
+const Login = (props) => (
+  <React.Fragment>
+  <div className='login-form' id="login">
+    <img className='logo' src={logo} alt="ducksoup logo" />
 
     <style>{`
       body > div,
@@ -27,7 +30,7 @@ const LoginForm = () => (
               type='password'
             />
 
-          <Button color='blue' fluid size='large'>
+          <Button color='blue' fluid size='large' onClick={props.changeLoggedIn}>
               Login
             </Button>
           </Segment>
@@ -38,6 +41,7 @@ const LoginForm = () => (
       </Grid.Column>
     </Grid>
   </div>
+  </React.Fragment>
 )
 
-export default LoginForm
+export default Login
