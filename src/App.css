@@ -5,37 +5,39 @@
 
 #login {
   background-color: #041143;
-  height: 101%;
+  height: 100%;
+  overflow: hidden;
 }
 
 .logo {
-height:25%;
-margin-bottom:-12%;
+height:20%;
+margin-bottom:-9%;
 }
-
-
 
 .header-logo {
-  height:10%;
+  height:6em;
 }
+
+.white {
+  color:white
+}
+
+.segments {
+opacity: .2;
+}
+
 
 #cardArray {
   display: flex;
-  justify-content: flex-start;
   flex-wrap: nowrap;
   overflow-x: scroll;
   width: 100%;
-  overflow-x: hidden;
 }
 
 #list {
   margin-top: 1em;
   margin-right: 1em;
   height: 100%;
-}
-
-.ui.segment {
-    opacity: .9;
 }
 
 #boardtitle {
@@ -47,4 +49,8 @@ margin-bottom:-12%;
   display: flex;
   justify-content: center;
   width: 100%;
+}
+
+#board-container {
+  width:114%;
 }

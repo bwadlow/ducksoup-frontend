@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
 import Card from './Card'
 
-
-
 class List extends Component {
-
 
   cardArray = (cardGroup) => {
     return cardGroup.map((card) =>{

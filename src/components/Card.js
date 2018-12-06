@@ -4,30 +4,10 @@ const Card = (props) => {
 
   const descriptionIcon =
       <div>
-      <i aria-hidden='true' className='file text outline small icon'/>
+      <i aria-hidden='true' className='align left small icon'/>
       </div>
 
       const displayIcon = props.card.description ? descriptionIcon : null
-
-      const dueDate = () => {
-        let x=new Date();
-        x.setFullYear(2018,1,1);
-        let today = new Date();
-
-        if (x>today)
-          {
-          return "Overdue";
-          }
-        else if (x<today)
-          {
-          return "x days left";
-          }
-        else {
-          return "Due Today";
-          }
-        }
-
-
 
   return (
 
@@ -38,10 +18,9 @@ const Card = (props) => {
         onDragOver={(event)=>{props.onDragOver(event)}}
         onClick={()=>{props.changeCardView(props.card.id)}}>
     <div className='content' id={props.card.position}>
-      <div className='header' id={props.card.position}>{props.card.title}
-      </div>
-      <div>
-      {displayIcon}
+      <div className='header' id={props.card.position}>
+        {props.card.title}
+        {displayIcon}
       </div>
     </div>
   </div>

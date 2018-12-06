@@ -5,7 +5,7 @@ const CardDetail = (props) => {
   const messageBox =
   <div className="ui container" >
   <label>Description</label>
-  <div className='ui segment' >
+  <div className='ui segment'>
     <p>{props.card.description}</p>
   </div>
   <i aria-hidden='true' className='left aligned edit link small icon' onClick={props.ChangeCardDetailComment}/>

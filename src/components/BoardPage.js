@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import BoardCollection from './BoardCollection'
 import BoardDetail from './BoardDetail'
+import Header from './Header'
 
 
 
@@ -264,12 +265,18 @@ render() {
 
 
   return (
-          <div className='ui container'>
-          
-            <div className='ui grid'>
-              {displayedView}
-            </div>
+    <Fragment>
+      <Header
+        createNewBoard={this.createNewBoard}
+        handleNaming={this.handleNaming}
+        changeLoggedIn={this.props.changeLoggedIn}
+      />
+      <div className='ui container'>
+        <div className='ui grid'>
+            {displayedView}
         </div>
+      </div>
+    </Fragment>
     )
   }
 }

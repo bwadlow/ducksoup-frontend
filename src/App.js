@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css';
 import BoardPage from './components/BoardPage'
 import Login from './components/Login'
-import Header from './components/Header'
+
 
 
 class App extends Component {
@@ -21,7 +21,8 @@ class App extends Component {
 
     if (this.state.loggedIn) {
       displayMain = <div>
-      <Header/><BoardPage/>
+      <BoardPage
+        changeLoggedIn={this.changeLoggedIn}/>
       </div>
     } else {
       displayMain = <Login changeLoggedIn={this.changeLoggedIn}/>
