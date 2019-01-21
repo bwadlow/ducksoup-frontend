@@ -12,6 +12,8 @@ body {
 
   background-image: url(https://www.nycgo.com/images/venues/1093/flatiron-building-02-tagger-yancey-iv__x_large.jpg);
   background-color:#041143;
+  background-repeat:no-repeat;
+  background-size:cover;
 
 
 

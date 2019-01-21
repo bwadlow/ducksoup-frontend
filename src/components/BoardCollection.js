@@ -16,9 +16,11 @@ class BoardCollection extends Component{
 
   return (
     <div className="ui four column grid" id="board-container">
+      <div className="ui container">
       <h1>Your Board Collection</h1>
         {BoardArray}
         </div>
+      </div>
 
 
 
