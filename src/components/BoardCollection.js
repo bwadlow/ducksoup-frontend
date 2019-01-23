@@ -1,9 +1,13 @@
-import React, { Component } from 'react'
-import Board from './Board'
+import React, { Component } from 'react';
+import Board from './Board';
+import { connect } from 'react-redux';
+import { fetchBoards } from '../actions'
 
 class BoardCollection extends Component{
 
-
+componentDidMount() {
+  this.props.fetchBoards()
+}
 
   render() {
     const BoardArray = this.props.boards.map(board =>(
@@ -27,4 +31,4 @@ class BoardCollection extends Component{
   )
 }
 }
-export default BoardCollection
+export default connect (null, {fetchBoards})(BoardCollection)

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 import logo from '../images/ducksoup_logo.png'
 
 const Login = (props) => (
@@ -35,7 +35,7 @@ const Login = (props) => (
             </Button>
           </Segment>
         </Form>
-      
+
       </Grid.Column>
     </Grid>
   </div>

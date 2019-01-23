@@ -9,9 +9,9 @@ const BoardDetail = (props) => {
 
     <div className="ui four column grid">
       <div className="column">
-      <h2 class='ui icon header'>{props.selectedBoard.name}</h2>
+      <h2 className='ui icon header'>{props.selectedBoard.name}</h2>
       <i aria-hidden='true' className='close link large icon' onClick={props.seeAllBoards} />
-    <form className='ui mini form' autocomplete="off" onSubmit={(event)=>{props.createNewList(event, props.currentBoard)}}>
+    <form className='ui mini form' autoComplete="off" onSubmit={(event)=>{props.createNewList(event, props.currentBoard)}}>
     <input className='ui mini input' name='newListName' placeholder='New List Name'onChange={props.handleNaming}/>
     <input type='submit' value='+ List' className='ui blue mini button' />
     </form>
