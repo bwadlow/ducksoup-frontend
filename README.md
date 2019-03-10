@@ -1,4 +1,4 @@
-## Clone Backend
+## Backend
 https://github.com/bwadlow/ducksoup-backend
 
 ## Demo Video
